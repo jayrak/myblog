@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
+
+    Route::get('work', 'Admin\WorkController@index');
+
     Route::get('work/create', 'Admin\WorkController@add');
     Route::post('work/create', 'Admin\WorkController@create');
 
