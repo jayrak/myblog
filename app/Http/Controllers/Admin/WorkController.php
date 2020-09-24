@@ -66,6 +66,14 @@ class WorkController extends Controller
             $posts = Works::all();
         }
         return view('admin.work.index', ['posts' => $posts, 'cond_name' => $cond_name]);
-  }
+    }
+    public function delete(Request $request)
+    {
+        // 該当するWorks Modelを取得
+        $works = Works::find($request->id);
+        // 削除する
+        $works->delete();
+        return redirect('admin/work/');
+  }  
 
 }

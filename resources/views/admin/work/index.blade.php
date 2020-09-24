@@ -52,6 +52,9 @@ use Illuminate\Support\Str;
                                         <div>
                                             <a href="{{ action('Admin\WorkController@edit', ['id' => $works->id]) }}">編集</a>
                                         </div>
+                                        <div>
+                                            <a href="{{ action('Admin\WorkController@delete', ['id' => $works->id]) }}">削除</a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
