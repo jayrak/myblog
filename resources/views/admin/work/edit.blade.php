@@ -1,4 +1,4 @@
-@extends('layouts.')
+@extends('layouts.work')
 @section('title', '職務経歴編集')
 
 @section('content')
@@ -27,9 +27,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="body">参考資料</label>
+                        <label class="col-md-2" for="image">参考資料</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" name="file" rows="20">{{ old('file' , $works_form->file) }}</textarea>
+                            <input type="file" class="form-control-file" name="file">
+                            <div class="form-text text-info">
+                                設定中: {{ $works_form->file_path }}
+                            </div>
+                            <div class="form-check">
+                                <label class="form-check-label">
+                                    <input type="checkbox" class="form-check-input" name="remove" value="true">ファイルを削除
+                                </label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

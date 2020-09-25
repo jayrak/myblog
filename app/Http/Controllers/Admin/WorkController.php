@@ -22,6 +22,17 @@ class WorkController extends Controller
         $works = new Works;
         $form = $request->all();
 
+        // フォームからファイルが送信されてきたら、保存して、$works->file_path に画像のパスを保存する
+        if (isset($form['file'])) {
+            $path = $request->file('file')->store('public/file');
+            $works->file_path = basename($path);
+        } else {
+            $works->file_path = null;
+        }
+
+        unset($form['_token']);
+        unset($form['file']);
+
         // データベースに保存する
         $works->fill($form);
         $works->save();
@@ -47,7 +58,16 @@ class WorkController extends Controller
         $works = Works::find($request->id);
         // 送信されてきたフォームデータを格納する
         $works_form = $request->all();
+
+        if (isset($works_form['file'])) {
+            $path = $request->file('file')->store('public/file');
+            $works->file_path = basename($path);
+            unset($works_form['file']);
+        } elseif (0 == strcmp($request->remove, 'true')) {
+            $works->file_path = null;
+        }
         unset($works_form['_token']);
+        unset($works_form['remove']);
 
         // 該当するデータを上書きして保存する
         $works->fill($works_form)->save();
@@ -62,7 +82,7 @@ class WorkController extends Controller
             // 検索されたら検索結果を取得する
             $posts = Works::where('name', $cond_name)->get();
         } else {
-            // それ以外はすべてのニュースを取得する
+            // それ以外はすべての職務経歴を取得する
             $posts = Works::all();
         }
         return view('admin.work.index', ['posts' => $posts, 'cond_name' => $cond_name]);
@@ -74,6 +94,6 @@ class WorkController extends Controller
         // 削除する
         $works->delete();
         return redirect('admin/work/');
-  }  
+    }  
 
 }

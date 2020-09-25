@@ -35,10 +35,9 @@ use Illuminate\Support\Str;
                         <thead>
                             <tr>
                                 <th width="10%">ID</th>
-                                <th width="15%">職歴・会社名</th>
-                                <th width="25%">詳細</th>
-                                <th width="40%">参考資料</th>
-                                <th width="10%">操作</th>
+                                <th width="25%">職歴・会社名</th>
+                                <th width="45%">詳細</th>
+                                <th width="20%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -47,12 +46,9 @@ use Illuminate\Support\Str;
                                     <th>{{ $works->id }}</th>
                                     <td>{{ Str::limit($works->name, 100) }}</td>
                                     <td>{{ Str::limit($works->description, 150) }}</td>
-                                    <td>{{ Str::limit($works->file, 250) }}</td>
                                     <td>
                                         <div>
                                             <a href="{{ action('Admin\WorkController@edit', ['id' => $works->id]) }}">編集</a>
-                                        </div>
-                                        <div>
                                             <a href="{{ action('Admin\WorkController@delete', ['id' => $works->id]) }}">削除</a>
                                         </div>
                                     </td>
