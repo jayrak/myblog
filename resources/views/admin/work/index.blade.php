@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
             <div class="col-md-8">
                 <form action="{{ action('Admin\WorkController@index') }}" method="get">
                     <div class="form-group row">
-                        <label class="col-md-2">職歴・会社名</label>
+                        <label class="col-md-2.5">職歴・会社名</label>
                         <div class="col-md-8">
                             <input type="text" class="form-control" name="cond_name" value="{{ $cond_name }}">
                         </div>
@@ -34,10 +34,11 @@ use Illuminate\Support\Str;
                     <table class="table table-dark">
                         <thead>
                             <tr>
-                                <th width="10%">ID</th>
+                                <th width="5%">ID</th>
                                 <th width="25%">職歴・会社名</th>
-                                <th width="45%">詳細</th>
-                                <th width="20%">操作</th>
+                                <th width="35%">詳細</th>
+                                <th width="20%">参考資料</th>
+                                <th width="15%">操作</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,6 +47,11 @@ use Illuminate\Support\Str;
                                     <th>{{ $works->id }}</th>
                                     <td>{{ Str::limit($works->name, 100) }}</td>
                                     <td>{{ Str::limit($works->description, 150) }}</td>
+                                    <td>
+                                        <div>
+                                            <a href="{{ action('Admin\WorkController@download') }}">ダウンロード</a>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div>
                                             <a href="{{ action('Admin\WorkController@edit', ['id' => $works->id]) }}">編集</a>
