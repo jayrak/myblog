@@ -95,5 +95,15 @@ class WorkController extends Controller
         $works->delete();
         return redirect('admin/work/');
     }  
+    public function download(Request $request)
+    {
+        // レスポンス版
+        $headers = ['Content-Type' => 'text/plain'];
+        $filename = 'test.txt';
+        return response()->download(\Storage::path('public/sample.txt'), $filename, $headers);
+     
+        // ストレージの中なら直接ダウンロードできる
+        // return Storage::download('public/sample.txt', $filename, $headers);
+    }
 
 }
