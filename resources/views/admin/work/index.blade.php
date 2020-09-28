@@ -48,9 +48,7 @@ use Illuminate\Support\Str;
                                     <td>{{ Str::limit($works->name, 100) }}</td>
                                     <td>{{ Str::limit($works->description, 150) }}</td>
                                     <td>
-                                        <div>
-                                            <a href="{{ action('Admin\WorkController@download') }}">ダウンロード</a>
-                                        </div>
+                                        <a href="{{ asset('storage/file/' . $works->file_path) }}" download>ダウンロード</a>
                                     </td>
                                     <td>
                                         <div>
