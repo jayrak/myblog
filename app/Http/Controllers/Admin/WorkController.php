@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Works;
+use App\WorkHistory;
+use Carbon\Carbon;
 
 class WorkController extends Controller
 {
@@ -72,6 +74,11 @@ class WorkController extends Controller
         // 該当するデータを上書きして保存する
         $works->fill($works_form)->save();
 
+        $history = new WorkHistory;
+        $history->works_id = $works->id;
+        $history->edited_at = Carbon::now();
+        $history->save();
+
         return redirect('admin/work');
     }
 
@@ -95,15 +102,5 @@ class WorkController extends Controller
         $works->delete();
         return redirect('admin/work/');
     }  
-    public function download(Request $request)
-    {
-        // レスポンス版
-        $headers = ['Content-Type' => 'text/plain'];
-        $filename = 'test.txt';
-        return response()->download(\Storage::path('public/sample.txt'), $filename, $headers);
-     
-        // ストレージの中なら直接ダウンロードできる
-        // return Storage::download('public/sample.txt', $filename, $headers);
-    }
 
 }
