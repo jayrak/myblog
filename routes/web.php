@@ -27,9 +27,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::get('work/delete', 'Admin\WorkController@delete');
     Route::get('work/download', 'Admin\WorkController@download');
 
-    
 });
 
 Auth::routes();
 
+Route::get('/', 'WorkwithController@index');
 Route::get('/home', 'HomeController@index')->name('home');
